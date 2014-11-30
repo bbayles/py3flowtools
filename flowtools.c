@@ -140,7 +140,6 @@ static struct PyMethodDef FlowSetMethods[] = {
 
 PyTypeObject FlowSetType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        0,                                      /* ob_size */
         "flowtools.FlowSet",                    /* tp_name */
         sizeof( FlowSetObject),                 /* tp_basicsize */
         0,                                      /* tp_itemsize */
@@ -188,7 +187,6 @@ static struct PyMethodDef FlowMethods[] = {
 
 PyTypeObject FlowType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        0,                                      /* ob_size */
         "flowtools.Flow",                       /* tp_name */
         sizeof( FlowObject),                    /* tp_basicsize */
         0,                                      /* tp_itemsize */
@@ -536,7 +534,6 @@ static void FlowPDUIter_Delete( FlowPDUIterObject *self )
 
 PyTypeObject FlowPDUIterType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        0,                                      /* ob_size */
         "flowtools.FlowPDUIter",                    /* tp_name */
         sizeof( FlowPDUIterObject),                 /* tp_basicsize */
         0,                                      /* tp_itemsize */
@@ -759,7 +756,6 @@ static struct PyMethodDef FlowPDU_Methods[] = {
 
 PyTypeObject FlowPDUType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        0,                                      /* ob_size */
         "flowtools.FlowPDU",                    /* tp_name */
         sizeof( FlowPDUObject),                 /* tp_basicsize */
         0,                                      /* tp_itemsize */
