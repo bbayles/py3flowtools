@@ -140,41 +140,41 @@ static struct PyMethodDef FlowSetMethods[] = {
 
 PyTypeObject FlowSetType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        "flowtools.FlowSet",                    /* tp_name */
-        sizeof( FlowSetObject),                 /* tp_basicsize */
-        0,                                      /* tp_itemsize */
-        (destructor)FlowSetObjectDelete,        /* tp_dealloc */
-        0,                                      /* tp_print */
-        0,      /* tp_getattr */
-        0,                                      /* tp_setattr */
-        0,                                      /* tp_compare */
-        (reprfunc)0,                            /* tp_repr */
-        0,                                      /* tp_as_number */
-        0,                                      /* tp_as_sequence */
-        0,                                      /* tp_as_mapping */
-        (hashfunc)0,                            /* tp_hash */
-        (ternaryfunc)0,                         /* tp_call */
-        0,                                      /* tp_str */
-        (getattrofunc)0,                        /* tp_getattro */
-        (setattrofunc)0,                        /* tp_setattro */
-        0,                                      /* tp_as_buffer */
-        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,                   /* tp_flags */
-        "Stream of netflow data",                                      /* tp_doc */
-        (traverseproc)0,                        /* tp_traverse */
-        (inquiry)0,                             /* tp_clear */
-        0,                                      /* tp_richcompare */
-        0,                                      /* tp_weaklistoffset */
-        (getiterfunc)FlowSetObjectIter,         /* tp_iter */
-        (iternextfunc)FlowSetObjectIterNext,    /* tp_iternext */
-        FlowSetMethods,                                      /* tp_methods */
-        0,                                      /* tp_members */
-        0,                                      /* tp_getset */
-        0,                                      /* tp_base */
-        0,                                      /* tp_dict */
-        0,                                      /* tp_descr_get */
-        0,                                      /* tp_descr_set */
-        0,                                      /* tp_dictoffset */
-        (initproc) FlowSet_init,                /* tp_init */
+        "flowtools.FlowSet",                        /* tp_name */
+        sizeof( FlowSetObject),                     /* tp_basicsize */
+        0,                                          /* tp_itemsize */
+        (destructor)FlowSetObjectDelete,            /* tp_dealloc */
+        0,                                          /* tp_print */
+        0,                                          /* tp_getattr */
+        0,                                          /* tp_setattr */
+        0,                                          /* tp_compare */
+        (reprfunc)0,                                /* tp_repr */
+        0,                                          /* tp_as_number */
+        0,                                          /* tp_as_sequence */
+        0,                                          /* tp_as_mapping */
+        (hashfunc)0,                                /* tp_hash */
+        (ternaryfunc)0,                             /* tp_call */
+        0,                                          /* tp_str */
+        (getattrofunc)0,                            /* tp_getattro */
+        (setattrofunc)0,                            /* tp_setattro */
+        0,                                          /* tp_as_buffer */
+        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,  /* tp_flags */
+        "Stream of netflow data",                   /* tp_doc */
+        (traverseproc)0,                            /* tp_traverse */
+        (inquiry)0,                                 /* tp_clear */
+        0,                                          /* tp_richcompare */
+        0,                                          /* tp_weaklistoffset */
+        (getiterfunc)FlowSetObjectIter,             /* tp_iter */
+        (iternextfunc)FlowSetObjectIterNext,        /* tp_iternext */
+        FlowSetMethods,                             /* tp_methods */
+        0,                                          /* tp_members */
+        0,                                          /* tp_getset */
+        0,                                          /* tp_base */
+        0,                                          /* tp_dict */
+        0,                                          /* tp_descr_get */
+        0,                                          /* tp_descr_set */
+        0,                                          /* tp_dictoffset */
+        (initproc) FlowSet_init,                    /* tp_init */
 };
 
 static void FlowObjectDelete( FlowObject *self );
@@ -192,7 +192,7 @@ PyTypeObject FlowType = {
         0,                                      /* tp_itemsize */
         (destructor)FlowObjectDelete,           /* tp_dealloc */
         0,                                      /* tp_print */
-        0, // (getattrfunc)FlowObjectGetAttr,         /* tp_getattr */
+        0,                                      /* tp_getattr */
         0,                                      /* tp_setattr */
         0,                                      /* tp_compare */
         (reprfunc)0,                            /* tp_repr */
@@ -202,7 +202,7 @@ PyTypeObject FlowType = {
         (hashfunc)0,                            /* tp_hash */
         (ternaryfunc)0,                         /* tp_call */
         0,                                      /* tp_str */
-        (getattrofunc)0,                        /*tp_getattro*/
+        (getattrofunc)0,                        /* tp_getattro*/
         (setattrofunc)0,                        /* tp_setattro */
         0,                                      /* tp_as_buffer */
         Py_TPFLAGS_DEFAULT,                     /* tp_flags */
@@ -211,11 +211,11 @@ PyTypeObject FlowType = {
         (inquiry)0,                             /* tp_clear */
         0,                                      /* tp_richcompare */
         0,                                      /* tp_weaklistoffset */
-        0,                                      /*tp_iter*/
-        0,                                      /*tp_iternext*/
-        FlowMethods,                                      /* tp_methods */
+        0,                                      /* tp_iter*/
+        0,                                      /* tp_iternext */
+        FlowMethods,                            /* tp_methods */
         0,                                      /* tp_members */
-        FlowObjectGS,                                      /* tp_getset */
+        FlowObjectGS,                           /* tp_getset */
         0,                                      /* tp_base */
         0,                                      /* tp_dict */
         0,                                      /* tp_descr_get */
@@ -536,39 +536,39 @@ PyTypeObject FlowPDUIterType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
         "flowtools.FlowPDUIter",                    /* tp_name */
         sizeof( FlowPDUIterObject),                 /* tp_basicsize */
-        0,                                      /* tp_itemsize */
-        (destructor) FlowPDUIter_Delete,        /* tp_dealloc */
-        0,                                      /* tp_print */
-        0,      /* tp_getattr */
-        0,                                      /* tp_setattr */
-        0,                                      /* tp_compare */
-        (reprfunc)0,                            /* tp_repr */
-        0,                                      /* tp_as_number */
-        0,                                      /* tp_as_sequence */
-        0,                                      /* tp_as_mapping */
-        (hashfunc)0,                            /* tp_hash */
-        (ternaryfunc)0,                         /* tp_call */
-        0,                                      /* tp_str */
-        (getattrofunc)0,                        /* tp_getattro */
-        (setattrofunc)0,                        /* tp_setattro */
-        0,                                      /* tp_as_buffer */
-        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,                   /* tp_flags */
-        "Iterator for PDU",                                      /* tp_doc */
-        (traverseproc)0,                        /* tp_traverse */
-        (inquiry)0,                             /* tp_clear */
-        0,                                      /* tp_richcompare */
-        0,                                      /* tp_weaklistoffset */
-        (getiterfunc) FlowPDUIter_Iter,         /* tp_iter */
-        (iternextfunc) FlowPDUIter_Next,    /* tp_iternext */
-        0,                                      /* tp_methods */
-        0,                                      /* tp_members */
-        0,                                      /* tp_getset */
-        0,                                      /* tp_base */
-        0,                                      /* tp_dict */
-        0,                                      /* tp_descr_get */
-        0,                                      /* tp_descr_set */
-        0,                                      /* tp_dictoffset */
-        0,                /* tp_init */
+        0,                                          /* tp_itemsize */
+        (destructor) FlowPDUIter_Delete,            /* tp_dealloc */
+        0,                                          /* tp_print */
+        0,                                          /* tp_getattr */
+        0,                                          /* tp_setattr */
+        0,                                          /* tp_compare */
+        (reprfunc)0,                                /* tp_repr */
+        0,                                          /* tp_as_number */
+        0,                                          /* tp_as_sequence */
+        0,                                          /* tp_as_mapping */
+        (hashfunc)0,                                /* tp_hash */
+        (ternaryfunc)0,                             /* tp_call */
+        0,                                          /* tp_str */
+        (getattrofunc)0,                            /* tp_getattro */
+        (setattrofunc)0,                            /* tp_setattro */
+        0,                                          /* tp_as_buffer */
+        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,  /* tp_flags */
+        "Iterator for PDU",                         /* tp_doc */
+        (traverseproc)0,                            /* tp_traverse */
+        (inquiry)0,                                 /* tp_clear */
+        0,                                          /* tp_richcompare */
+        0,                                          /* tp_weaklistoffset */
+        (getiterfunc) FlowPDUIter_Iter,             /* tp_iter */
+        (iternextfunc) FlowPDUIter_Next,            /* tp_iternext */
+        0,                                          /* tp_methods */
+        0,                                          /* tp_members */
+        0,                                          /* tp_getset */
+        0,                                          /* tp_base */
+        0,                                          /* tp_dict */
+        0,                                          /* tp_descr_get */
+        0,                                          /* tp_descr_set */
+        0,                                          /* tp_dictoffset */
+        0,                                          /* tp_init */
 };
 
 
@@ -756,43 +756,43 @@ static struct PyMethodDef FlowPDU_Methods[] = {
 
 PyTypeObject FlowPDUType = {
         PyVarObject_HEAD_INIT(&PyType_Type, 0)
-        "flowtools.FlowPDU",                    /* tp_name */
-        sizeof( FlowPDUObject),                 /* tp_basicsize */
-        0,                                      /* tp_itemsize */
-        (destructor) FlowPDU_Delete,        /* tp_dealloc */
-        0,                                      /* tp_print */
-        0,      /* tp_getattr */
-        0,                                      /* tp_setattr */
-        0,                                      /* tp_compare */
-        (reprfunc)0,                            /* tp_repr */
-        0,                                      /* tp_as_number */
-        0,                                      /* tp_as_sequence */
-        0,                                      /* tp_as_mapping */
-        (hashfunc)0,                            /* tp_hash */
-        (ternaryfunc)0,                         /* tp_call */
-        0,                                      /* tp_str */
-        (getattrofunc)0,                        /* tp_getattro */
-        (setattrofunc)0,                        /* tp_setattro */
-        0,                                      /* tp_as_buffer */
-        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,                   /* tp_flags */
+        "flowtools.FlowPDU",                        /* tp_name */
+        sizeof( FlowPDUObject),                     /* tp_basicsize */
+        0,                                          /* tp_itemsize */
+        (destructor) FlowPDU_Delete,                /* tp_dealloc */
+        0,                                          /* tp_print */
+        0,                                          /* tp_getattr */
+        0,                                          /* tp_setattr */
+        0,                                          /* tp_compare */
+        (reprfunc)0,                                /* tp_repr */
+        0,                                          /* tp_as_number */
+        0,                                          /* tp_as_sequence */
+        0,                                          /* tp_as_mapping */
+        (hashfunc)0,                                /* tp_hash */
+        (ternaryfunc)0,                             /* tp_call */
+        0,                                          /* tp_str */
+        (getattrofunc)0,                            /* tp_getattro */
+        (setattrofunc)0,                            /* tp_setattro */
+        0,                                          /* tp_as_buffer */
+        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_ITER,  /* tp_flags */
         "FlowPDU(int exporter, string buffer) -> FlowPDU object.\n\n"
         "Contains flow header attributes. Can be iterated over to get\n"
-        "individual flows.",                                      /* tp_doc */
-        (traverseproc)0,                        /* tp_traverse */
-        (inquiry)0,                             /* tp_clear */
-        (richcmpfunc) FlowPDU_RichCompare,                                      /* tp_richcompare */
-        0,                                      /* tp_weaklistoffset */
-        (getiterfunc)FlowPDU_Iter,         /* tp_iter */
-        0,    /* tp_iternext */
-        FlowPDU_Methods,                                      /* tp_methods */
-        FlowPDU_Members,                                      /* tp_members */
-        0,                                      /* tp_getset */
-        0,                                      /* tp_base */
-        0,                                      /* tp_dict */
-        0,                                      /* tp_descr_get */
-        0,                                      /* tp_descr_set */
-        0,                                      /* tp_dictoffset */
-        (initproc) FlowPDU_init,                /* tp_init */
+        "individual flows.",                        /* tp_doc */
+        (traverseproc)0,                            /* tp_traverse */
+        (inquiry)0,                                 /* tp_clear */
+        (richcmpfunc) FlowPDU_RichCompare,          /* tp_richcompare */
+        0,                                          /* tp_weaklistoffset */
+        (getiterfunc)FlowPDU_Iter,                  /* tp_iter */
+        0,                                          /* tp_iternext */
+        FlowPDU_Methods,                            /* tp_methods */
+        FlowPDU_Members,                            /* tp_members */
+        0,                                          /* tp_getset */
+        0,                                          /* tp_base */
+        0,                                          /* tp_dict */
+        0,                                          /* tp_descr_get */
+        0,                                          /* tp_descr_set */
+        0,                                          /* tp_dictoffset */
+        (initproc) FlowPDU_init,                    /* tp_init */
 };
 
 
