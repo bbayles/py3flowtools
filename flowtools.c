@@ -825,6 +825,18 @@ static void InitExceptions(PyObject *module_dict) {
   PyDict_SetItemString( module_dict, "AttributeError", FlowToolsAttributeError );
 }
 
+static struct PyModuleDef moduledef = {
+  PyModuleDef_HEAD_INIT,
+  "flowtools",                                   /* m_name */
+  "Python interface to OSU flow-tools library",  /* m_doc */
+  -1,                                            /* m_size */
+  FlowToolsMethods,                              /* m_methods */
+  NULL,                                          /* m_reload */
+  NULL,                                          /* m_traverse */
+  NULL,                                          /* m_clear */
+  NULL,                                          /* m_free */
+};
+
 void initflowtools()
 {
     PyObject *d, *m;
@@ -840,7 +852,7 @@ void initflowtools()
         (PyType_Ready(&FlowPDUIterType) < 0))
       return;
 
-    m = Py_InitModule3( "flowtools", FlowToolsMethods, FlowToolsModuleDescription );
+    m = PyModule_Create(&moduledef);
     
     Py_INCREF(&FlowSetType);
     Py_INCREF(&FlowPDUType);
