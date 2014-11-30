@@ -13,6 +13,10 @@
   #define Py_TYPE(ob) (((PyObject*)(ob))->ob_type)
 #endif
 
+#if PY_MAJOR_VERSION >=3
+#  define Py_TPFLAGS_HAVE_ITER 0
+#endif
+
 typedef struct {
   PyObject_HEAD
 
@@ -831,7 +835,7 @@ static struct PyModuleDef moduledef = {
 };
 
 
-PyMODINIT_FUNC PyInit_flowtools()
+PyMODINIT_FUNC PyInit_flowtools(void)
 {
     PyObject *d, *m;
 
