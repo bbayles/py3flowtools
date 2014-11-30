@@ -844,7 +844,7 @@ PyMODINIT_FUNC PyInit_flowtools()
         (PyType_Ready(&FlowType) < 0) ||
         (PyType_Ready(&FlowPDUType) < 0) ||
         (PyType_Ready(&FlowPDUIterType) < 0))
-      return;
+      return NULL;
 
     m = PyModule_Create(&moduledef);
     if (m == NULL)
