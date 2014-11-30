@@ -837,7 +837,7 @@ static struct PyModuleDef moduledef = {
   NULL,                                          /* m_free */
 };
 
-void initflowtools()
+PyMODINIT_FUNC PyInit_flowtools()
 {
     PyObject *d, *m;
 
@@ -853,6 +853,8 @@ void initflowtools()
       return;
 
     m = PyModule_Create(&moduledef);
+    if (m == NULL)
+      return NULL;
     
     Py_INCREF(&FlowSetType);
     Py_INCREF(&FlowPDUType);
@@ -864,5 +866,7 @@ void initflowtools()
 
     d = PyModule_GetDict( m );
     InitExceptions(d);
+
+    return m;
 }
 
