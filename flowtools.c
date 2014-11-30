@@ -9,6 +9,10 @@
 #define HAVE_STRSEP 1
 #include <ftlib.h>
 
+#ifndef Py_TYPE
+  #define Py_TYPE(ob) (((PyObject*)(ob))->ob_type)
+#endif
+
 typedef struct {
   PyObject_HEAD
 
@@ -320,7 +324,7 @@ static void FlowSetObjectDelete( FlowSetObject *self )
       Py_END_ALLOW_THREADS
     }
 
-    self->ob_type->tp_free(self);
+    Py_TYPE(self)->tp_free(self);
 }
 
 static PyObject *FlowSetObjectIter( FlowSetObject *self )
@@ -408,7 +412,7 @@ resout:
 static void FlowObjectDelete( FlowObject *self )
 {
     Py_XDECREF( self->parent );
-    self->ob_type->tp_free(self);
+    Py_TYPE(self)->tp_free(self);
 }
 
 #define getoffset( f ) ( * ( (uint16_t *)( (void *)( &self->offsets ) + f->offset ) ) )
@@ -526,7 +530,7 @@ static PyObject *FlowPDUIter_Next( FlowPDUIterObject *self )
 static void FlowPDUIter_Delete( FlowPDUIterObject *self )
 {
     Py_XDECREF( self->pdu );
-    self->ob_type->tp_free(self);
+    Py_TYPE(self)->tp_free(self);
 }
 
 
@@ -727,7 +731,7 @@ static PyObject *FlowPDU_IsNext(FlowPDUObject * self, PyObject * args, PyObject 
 
 static void FlowPDU_Delete( FlowPDUObject *self )
 {
-    self->ob_type->tp_free(self);
+    Py_TYPE(self)->tp_free(self);
 }
 
 static struct PyMemberDef FlowPDU_Members[] = {
