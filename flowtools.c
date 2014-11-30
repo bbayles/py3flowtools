@@ -731,17 +731,17 @@ static void FlowPDU_Delete( FlowPDUObject *self )
 }
 
 static struct PyMemberDef FlowPDU_Members[] = {
-  { "version", T_INT, offsetof(FlowPDUObject, version), RO,
+  { "version", T_INT, offsetof(FlowPDUObject, version), READONLY,
     "unsigned int -> Netflow version." },
-  { "sequence", T_UINT, offsetof(FlowPDUObject, sequence), RO,
+  { "sequence", T_UINT, offsetof(FlowPDUObject, sequence), READONLY,
     "unsigned int -> Seq counter of total flows seen." },
-  { "count", T_INT, offsetof(FlowPDUObject, count), RO,
+  { "count", T_INT, offsetof(FlowPDUObject, count), READONLY,
     "unsigned int -> The number of records in the PDU." },
-  { "sysUpTime", T_UINT, offsetof(FlowPDUObject, sysUpTime), RO,
+  { "sysUpTime", T_UINT, offsetof(FlowPDUObject, sysUpTime), READONLY,
     "unsigned int -> Current time in millisecs since router booted." },
-  { "unix_secs", T_UINT, offsetof(FlowPDUObject, unix_secs), RO,
+  { "unix_secs", T_UINT, offsetof(FlowPDUObject, unix_secs), READONLY,
     "unsigned int -> Current seconds since 0000 UTC 1970." },
-  { "unix_nsecs", T_UINT, offsetof(FlowPDUObject, unix_nsecs), RO,
+  { "unix_nsecs", T_UINT, offsetof(FlowPDUObject, unix_nsecs), READONLY,
     "unsigned int -> Residual nanoseconds since 0000 UTC 1970." },
   { 0 } };
 
