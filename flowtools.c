@@ -800,10 +800,6 @@ static struct PyMethodDef FlowToolsMethods[] = {
     { NULL }
 };
 
-static char* FlowToolsModuleDescription = 
-  "Python interface to OSU flow-tools library.\n\n"
-  "This module allows you to read, parse, and write netflow PDUs";
-
 static void InitExceptions(PyObject *module_dict) {
   PyObject *t;
 
@@ -821,6 +817,7 @@ static void InitExceptions(PyObject *module_dict) {
   PyDict_SetItemString( module_dict, "AttributeError", FlowToolsAttributeError );
 }
 
+
 static struct PyModuleDef moduledef = {
   PyModuleDef_HEAD_INIT,
   "flowtools",                                   /* m_name */
@@ -832,6 +829,7 @@ static struct PyModuleDef moduledef = {
   NULL,                                          /* m_clear */
   NULL,                                          /* m_free */
 };
+
 
 PyMODINIT_FUNC PyInit_flowtools()
 {
