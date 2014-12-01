@@ -1,5 +1,0 @@
-This is an attempt at updating the version of pyflowtools at
-http://code.google.com/p/pyflowtools/ to work with Python 3.4.
-
-It should be considered experimental. See README-orig for the original
-maintainer's README.
