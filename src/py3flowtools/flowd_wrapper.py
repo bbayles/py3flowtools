@@ -8,7 +8,7 @@ import io
 import os
 import sys
 
-from flow_line import FlowLine
+from .flow_line import FlowLine
 
 if sys.version_info.major < 3:
     import subprocess32 as subprocess
@@ -41,6 +41,6 @@ def FlowLog(file_path):
             except StopIteration:
                 msg = 'Could not extract data from {}'.format(file_path)
                 raise IOError(msg)
-            for line in enumerate(iterator):
+            for line in iterator:
                 parsed_line = FlowLine(line)
                 yield parsed_line
