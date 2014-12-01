@@ -33,6 +33,8 @@ The iterator will return a data structure that exposes these attributes:
 
 TODO:
 
+
+* IPv6 support
 * More thorough documentation (sorry!)
 * Method to guess which log format is to be used
 * Support for gzip-compressed logs
