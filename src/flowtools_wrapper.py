@@ -1,4 +1,9 @@
+# flowtools_wrapper.py
+# Copyright 2014 Bo Bayles (bbayles@gmail.com)
+# See http://github.com/bbayles/py3flowtools for documentation and license
+
 from __future__ import division, print_function, unicode_literals
+
 import datetime
 import io
 import os
@@ -19,6 +24,7 @@ FLOW_EXPORT_ARGS = [
 ipv4_struct = struct.Struct('!I')
 inet_aton = lambda x: ipv4_struct.unpack(socket.inet_aton(x))[0]
 utc_time = lambda x: datetime.datetime.utcfromtimestamp(int(x) / 1000)
+
 
 class FlowToolsLine(object):
     def __init__(self, line):
