@@ -29,10 +29,10 @@ setup(
 
     author='Bo Bayles',
     author_email='bbayles@gmail.com',
-      
-      license='MIT',
-      
-      classifiers=[
+
+    license='MIT',
+
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Telecommunications Industry',
         'Topic :: Utilities',
