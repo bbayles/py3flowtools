@@ -15,6 +15,8 @@ if sys.version_info.major < 3:
 else:
     import subprocess
 
+ERR_MSG = 'Could not extract data from {}'
+
 FLOWD_READER_ARGS = [
     'flowd-reader',
     '-v',  # Verbose output
@@ -39,8 +41,11 @@ def FlowLog(file_path):
                 next(iterator)
                 next(iterator)
             except StopIteration:
-                msg = 'Could not extract data from {}'.format(file_path)
-                raise IOError(msg)
+                raise IOError(ERR_MSG.format(file_path))
+            line = None
             for line in iterator:
                 parsed_line = FlowLine(line)
                 yield parsed_line
+            else:
+                if line is None:
+                    raise IOError(ERR_MSG.format(file_path))
