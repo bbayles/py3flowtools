@@ -50,7 +50,8 @@ for line in parser:
 
 ## TODO list
 
-* Fix timestamp usage
+* Verify timestamp calculations
+* Unit tests
 * IPv6 support
 * More thorough documentation (sorry!)
 * Method to guess which log format is to be used
