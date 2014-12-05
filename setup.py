@@ -43,7 +43,9 @@ setup(
 
     keywords='netflow flow-tools flowd',
 
-    packages=find_packages(exclude=[]),
+    packages=find_packages(exclude=['tests']),
 
     install_requires=install_requires,
+
+    test_suite='tests'
 )
