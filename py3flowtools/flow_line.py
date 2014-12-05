@@ -4,25 +4,27 @@
 from __future__ import division, print_function, unicode_literals
 
 import datetime
+import math
 import socket
 import struct
 
 inet_aton = lambda x: ipv4_struct.unpack(socket.inet_aton(x))[0]
 ipv4_struct = struct.Struct('!I')
 
+_1E6 = pow(10, 6)
+_1E9 = pow(10, 9)
+
 
 def get_utc_time(unix_secs, unix_nsecs, sysuptime, x):
-    # unix_secs is the whole number of seconds since the epoch
-    # unix_nsecs is the number of residual nanoseconds
-    unix_time = unix_secs + (unix_nsecs / 1E9)
+    sysuptime_sec, sysuptime_msec = divmod(sysuptime, 1000)
+    x_sec, x_msec = divmod(x, 1000)
 
-    # sysuptime is the number of milliseconds the collecting device has been on
-    unix_base = unix_time - (sysuptime / 1000)
+    base_secs = unix_secs - sysuptime_sec + x_sec
+    base_nsecs = unix_nsecs - (sysuptime_msec * _1E6) + (x_msec * _1E6)
+    whole_secs, remainder_nsecs = divmod(base_nsecs, _1E9)
 
-    # x (either first or start) is the number of milliseconds of uptime at the
-    # start or end of the flow
-    ret = datetime.datetime.utcfromtimestamp(unix_base + (x / 1000))
-
+    ret = datetime.datetime.utcfromtimestamp(base_secs + whole_secs)
+    ret = ret.replace(microsecond=remainder_nsecs // 1000)
     return ret
 
 
