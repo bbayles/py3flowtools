@@ -1,8 +1,15 @@
 ## Introduction
 
-This repository holds Python tools for interacting with NetFlow data. They are
+This repository holds Python tools for reading NetFlow data. They are
 lightweight wrappers on top of the [flow-tools](https://code.google.com/p/flow-tools/)
-and [flowd](https://code.google.com/p/flowd/) binaries. They should be considered experimental.
+and [flowd](https://code.google.com/p/flowd/) binaries. They should be
+considered experimental.
+
+These tools are written with Python 3 in mind, but I will keep them working
+with Python 2.7 as well.
+
+I test the most with NetFlow v5. If you have samples of other NetFlow logs that
+you can share, please send them to me.
 
 
 ## Requirements
@@ -50,10 +57,9 @@ for line in parser:
 
 ## TODO list
 
-* Verify timestamp calculations
-* Unit tests
+* More unit tests
 * IPv6 support
-* More thorough documentation (sorry!)
+* More thorough documentation
 * Method to guess which log format is to be used
 * Support for gzip-compressed logs
 
