@@ -11,7 +11,23 @@ import unittest
 import py3flowtools
 
 
-class TestPy3FlowTools(unittest.TestCase):
+FLOW_LINE_ATTRIBUTES = [
+    'dOctets',
+    'dPkts',
+    'first',
+    'last',
+    'srcaddr',
+    'srcaddr_raw',
+    'dstaddr',
+    'dstaddr_raw',
+    'srcport',
+    'dstport',
+    'prot',
+    'tcp_flags',
+]
+
+
+class TestFlowToolsWrapper(unittest.TestCase):
     def setUp(self):
         file_path = os.path.join(
             os.path.dirname(__file__),
@@ -49,25 +65,12 @@ class TestPy3FlowTools(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_bogus_file(self):
-        parser = py3flowtools.FlowSet(__file__)
+        parser = py3flowtools.FlowSet('flowd.log')
         with self.assertRaises(IOError):
             list(parser)
 
     def test_attributes(self):
-        attributes = [
-            'dOctets',
-            'dPkts',
-            'first',
-            'last',
-            'srcaddr',
-            'srcaddr_raw',
-            'dstaddr',
-            'dstaddr_raw',
-            'srcport',
-            'dstport',
-            'prot',
-            'tcp_flags',
-        ]
+        attributes = FLOW_LINE_ATTRIBUTES
         for flow, attribute in itertools.product(self.flows, attributes):
             self.assertTrue(hasattr(flow, attribute))
 
@@ -89,6 +92,75 @@ class TestPy3FlowTools(unittest.TestCase):
             self.flows[4].dstport: 42777,
             self.flows[5].prot: 6,
             self.flows[6].prot: 17,
+        }
+        for k, v in D.items():
+            self.assertEqual(k, v)
+
+class TestFlowdWrapper(unittest.TestCase):
+    def setUp(self):
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            'flowd.log'
+        )
+        parser = py3flowtools.FlowLog(file_path)
+        self.flows = list(parser)
+
+    def test_length(self):
+        # The test file should have 20 flows
+        self.assertEqual(len(self.flows), 20)
+
+    def test_first_calc(self):
+        # Compare the first field to known values
+        self.flows.sort(key=lambda x: x.first)
+        known_values = (
+            datetime.datetime(2014, 11, 26, 13, 34, 55, 928908),
+            datetime.datetime(2014, 11, 26, 13, 34, 56, 48780),
+            datetime.datetime(2014, 11, 26, 13, 34, 56, 150597),
+        )
+        for i, expected in zip([0, 10, -1], known_values):
+            actual = self.flows[i].first
+            self.assertEqual(actual, expected)
+
+    def test_last_calc(self):
+        # Compare the last field to known values
+        self.flows.sort(key=lambda x: x.last)
+        known_values = (
+            datetime.datetime(2014, 11, 26, 13, 34, 56, 152053),
+            datetime.datetime(2014, 11, 26, 13, 34, 56, 531199),
+            datetime.datetime(2014, 11, 26, 13, 34, 56, 896285)
+        )
+        for i, expected in zip([0, 10, -1], known_values):
+            actual = self.flows[i].last
+            self.assertEqual(actual, expected)
+
+    def test_bogus_file(self):
+        parser = py3flowtools.FlowLog('flowtools.log')
+        with self.assertRaises(IOError):
+            list(parser)
+
+    def test_attributes(self):
+        attributes = FLOW_LINE_ATTRIBUTES
+        for flow, attribute in itertools.product(self.flows, attributes):
+            self.assertTrue(hasattr(flow, attribute))
+
+    def test_ip_addresses(self):
+        D = {
+            self.flows[1].srcaddr: '192.0.2.28',
+            self.flows[2].srcaddr_raw: 3221226212,
+            self.flows[3].dstaddr: '192.0.2.187',
+            self.flows[4].dstaddr_raw: 3221226025,
+        }
+        for k, v in D.items():
+            self.assertEqual(k, v)
+
+    def test_fields(self):
+        D = {
+            self.flows[1].dOctets: 95095,
+            self.flows[2].dPkts: 16,
+            self.flows[3].srcport: 16335,
+            self.flows[4].dstport: 14915,
+            self.flows[5].prot: 17,
+            self.flows[6].prot: 6,
         }
         for k, v in D.items():
             self.assertEqual(k, v)
