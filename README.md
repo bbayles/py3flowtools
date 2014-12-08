@@ -33,8 +33,8 @@ NetFlow log to get an iterator over the flows in the log:
 
 The iterator will return a data structure that exposes these attributes:
 
-* `first` - UTC timestamp
-* `last` - UTC timestamp
+* `first` - A naive `datetime.datetime` object. UTC is assumed.
+* `last` - A naive `datetime.datetime` object. UTC is assumed.
 * `srcaddr` - IP address as a string
 * `srcaddr_raw` - IP address as an integer
 * `dstaddr` - IP address as a string
