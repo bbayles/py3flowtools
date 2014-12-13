@@ -25,9 +25,10 @@ You will need:
 
 ## Usage
 
-Call either `py3flowtools.FlowToolsLog` or `py3flowtools.FlowdLog` with the path to a
-NetFlow log to get an iterator over the flows in the log:
+Call one of these functions to a NetFlow log to get an iterator over the flows
+in the log:
 
+* Use `NetFlowLog` to have the module try to guess which reader to use
 * Use `FlowToolsLog` for logs that `flow-tools` can read
 * Use `FlowdLog` for logs that `flowd` can reader
 
@@ -60,7 +61,6 @@ for line in parser:
 * More unit tests
 * IPv6 support
 * More thorough documentation
-* Method to guess which log format is to be used
 * Support for gzip-compressed logs
 
 I started with the idea of updating the [pyflowtools](http://code.google.com/p/pyflowtools/)

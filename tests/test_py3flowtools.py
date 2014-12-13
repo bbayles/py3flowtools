@@ -96,6 +96,7 @@ class TestFlowToolsWrapper(unittest.TestCase):
         for k, v in D.items():
             self.assertEqual(k, v)
 
+
 class TestFlowdWrapper(unittest.TestCase):
     def setUp(self):
         file_path = os.path.join(
@@ -164,3 +165,29 @@ class TestFlowdWrapper(unittest.TestCase):
         }
         for k, v in D.items():
             self.assertEqual(k, v)
+
+
+class TestNetFlowLog(unittest.TestCase):
+    def test_flowtools(self):
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            'flowtools.log'
+        )
+        netflow_log = list(py3flowtools.NetFlowLog(file_path))
+        self.assertEqual(len(netflow_log), 20)
+
+    def test_flowd(self):
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            'flowd.log'
+        )
+        netflow_log = list(py3flowtools.NetFlowLog(file_path))
+        self.assertEqual(len(netflow_log), 20)
+
+    def test_bogus(self):
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            '__init__.py'
+        )
+        with self.assertRaises(IOError):
+            list(py3flowtools.NetFlowLog(file_path))
