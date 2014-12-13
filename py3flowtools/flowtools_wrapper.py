@@ -21,7 +21,7 @@ FLOW_EXPORT_ARGS = [
 ]
 
 
-def FlowSet(file_path):
+def FlowToolsLog(file_path):
     with io.open(file_path, mode='rb') as flow_fd, \
             io.open(os.devnull, mode='wb') as DEVNULL:
         with subprocess.Popen(

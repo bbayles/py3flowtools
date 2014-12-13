@@ -25,11 +25,11 @@ You will need:
 
 ## Usage
 
-Call either `py3flowtools.FlowSet` or `py3flowtools.FlowLog` with the path to a
+Call either `py3flowtools.FlowToolsLog` or `py3flowtools.FlowdLog` with the path to a
 NetFlow log to get an iterator over the flows in the log:
 
-* Use `FlowSet` for logs that `flow-tools` can read
-* Use `FlowLog` for logs that `flowd` can reader
+* Use `FlowToolsLog` for logs that `flow-tools` can read
+* Use `FlowdLog` for logs that `flowd` can reader
 
 The iterator will return a data structure that exposes these attributes:
 
@@ -48,9 +48,9 @@ The iterator will return a data structure that exposes these attributes:
 
 
 ```python
-from py3flowtools import FlowSet
+from py3flowtools import FlowToolsLog
 
-parser = FlowSet('flowtools.bin')
+parser = FlowToolsLog('flowtools.bin')
 for line in parser:
     print(line.dOctets, sep='\t')
 ```

@@ -26,7 +26,7 @@ FLOWD_READER_ARGS = [
 ]
 
 
-def FlowLog(file_path):
+def FlowdLog(file_path):
     args = FLOWD_READER_ARGS[:]
     args[-1] = file_path
     with io.open(os.devnull, mode='wb') as DEVNULL:

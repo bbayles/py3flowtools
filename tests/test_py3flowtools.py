@@ -33,7 +33,7 @@ class TestFlowToolsWrapper(unittest.TestCase):
             os.path.dirname(__file__),
             'flowtools.log'
         )
-        parser = py3flowtools.FlowSet(file_path)
+        parser = py3flowtools.FlowToolsLog(file_path)
         self.flows = list(parser)
 
     def test_length(self):
@@ -65,7 +65,7 @@ class TestFlowToolsWrapper(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_bogus_file(self):
-        parser = py3flowtools.FlowSet('flowd.log')
+        parser = py3flowtools.FlowToolsLog('flowd.log')
         with self.assertRaises(IOError):
             list(parser)
 
@@ -102,7 +102,7 @@ class TestFlowdWrapper(unittest.TestCase):
             os.path.dirname(__file__),
             'flowd.log'
         )
-        parser = py3flowtools.FlowLog(file_path)
+        parser = py3flowtools.FlowdLog(file_path)
         self.flows = list(parser)
 
     def test_length(self):
@@ -134,7 +134,7 @@ class TestFlowdWrapper(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_bogus_file(self):
-        parser = py3flowtools.FlowLog('flowtools.log')
+        parser = py3flowtools.FlowdLog('flowtools.log')
         with self.assertRaises(IOError):
             list(parser)
 
