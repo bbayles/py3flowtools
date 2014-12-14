@@ -26,26 +26,49 @@ FLOWD_READER_ARGS = [
 ]
 
 
-def FlowdLog(file_path):
-    args = FLOWD_READER_ARGS[:]
-    args[-1] = file_path
-    with io.open(os.devnull, mode='wb') as DEVNULL:
-        with subprocess.Popen(
-                args,
-                stdout=subprocess.PIPE,
-                stderr=DEVNULL
-        ) as proc:
-            iterator = iter(proc.stdout.readline, b'')
-            try:
-                # Skip the headers
-                next(iterator)
-                next(iterator)
-            except StopIteration:
-                raise IOError(ERR_MSG.format(file_path))
-            line = None
-            for line in iterator:
-                parsed_line = FlowLine(line)
-                yield parsed_line
-            else:
-                if line is None:
-                    raise IOError(ERR_MSG.format(file_path))
+class FlowdLog(object):
+    def __init__(self, file_path):
+        self._file_path = file_path
+
+    def __iter__(self):
+        self._parser = self._reader()
+        return self
+
+    def __next__(self):
+        return next(self._parser)
+
+    def next(self):
+        """
+        next method included for compatibility with Python 2
+        """
+        return self.__next__()
+
+    def read_flow(self):
+        """
+        read_flow method included for compatibility with flowd module
+        """
+        return self.__next__()
+
+    def _reader(self):
+        args = FLOWD_READER_ARGS[:]
+        args[-1] = self._file_path
+        with io.open(os.devnull, mode='wb') as DEVNULL:
+            with subprocess.Popen(
+                    args,
+                    stdout=subprocess.PIPE,
+                    stderr=DEVNULL
+            ) as proc:
+                iterator = iter(proc.stdout.readline, b'')
+                try:
+                    # Skip the headers
+                    next(iterator)
+                    next(iterator)
+                except StopIteration:
+                    raise IOError(ERR_MSG.format(self._file_path))
+                line = None
+                for line in iterator:
+                    parsed_line = FlowLine(line)
+                    yield parsed_line
+                else:
+                    if line is None:
+                        raise IOError(ERR_MSG.format(self._file_path))
