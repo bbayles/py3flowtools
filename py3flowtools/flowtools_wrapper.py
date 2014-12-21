@@ -23,21 +23,9 @@ FLOW_EXPORT_ARGS = [
 
 
 class FlowToolsLog(BaseFlowLog):
-    def __init__(self, file_path):
-        self._file_path = file_path
-
-    def __iter__(self):
-        self._parser = self._reader()
-        return self
-
-    def __next__(self):
-        return next(self._parser)
-
-    def next(self):
-        """
-        next method included for compatibility with Python 2
-        """
-        return self.__next__()
+    """
+    Uses flow-export to parse a log that flow-tools can read.
+    """
 
     def _reader(self):
         with io.open(self._file_path, mode='rb') as flow_fd, \

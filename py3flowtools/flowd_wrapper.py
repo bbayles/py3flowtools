@@ -28,21 +28,9 @@ FLOWD_READER_ARGS = [
 
 
 class FlowdLog(BaseFlowLog):
-    def __init__(self, file_path):
-        self._file_path = file_path
-
-    def __iter__(self):
-        self._parser = self._reader()
-        return self
-
-    def __next__(self):
-        return next(self._parser)
-
-    def next(self):
-        """
-        next method included for compatibility with Python 2
-        """
-        return self.__next__()
+    """
+    Uses flowd-reader to parse a log that flow-tools can read.
+    """
 
     def read_flow(self):
         """
