@@ -8,6 +8,7 @@ import io
 import os
 import sys
 
+from .base_flow_wrapper import BaseFlowLog
 from .flow_line import FlowLine
 
 if sys.version_info.major < 3:
@@ -21,7 +22,7 @@ FLOW_EXPORT_ARGS = [
 ]
 
 
-class FlowToolsLog(object):
+class FlowToolsLog(BaseFlowLog):
     def __init__(self, file_path):
         self._file_path = file_path
 
