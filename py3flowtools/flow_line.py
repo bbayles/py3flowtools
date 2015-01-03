@@ -1,5 +1,5 @@
 # flow_line.py
-# Copyright 2014 Bo Bayles (bbayles@gmail.com)
+# Copyright 2015 Bo Bayles (bbayles@gmail.com)
 # See http://github.com/bbayles/py3flowtools for documentation and license
 
 from __future__ import division, print_function, unicode_literals
