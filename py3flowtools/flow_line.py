@@ -14,6 +14,8 @@ ipv4_struct = struct.Struct('!I')
 _1E6 = pow(10, 6)
 _1E9 = pow(10, 9)
 
+ISO8601_FMT = '%Y-%m-%d %H:%M:%S.%f'
+
 
 def get_utc_time(unix_secs, unix_nsecs, sysuptime, x):
     sysuptime_sec, sysuptime_msec = divmod(sysuptime, 1000)
@@ -52,3 +54,21 @@ class FlowLine(object):
         self.dstport = int(line[16])
         self.prot = int(line[17])
         self.tcp_flags = int(line[19])
+
+
+class NfdumpLine(object):
+    def __init__(self, line):
+        # TODO 'fmt:%ts,%te,%sa,%sp,%da,%dp,%pr,%ipkt,%opkt,%ibyt,%obyt,%flg'
+        line = line.decode('ascii').split(',')
+        self.first = datetime.strptime(line[0], ISO8601_FMT)
+        self.last = datetime.strptime(line[0], ISO8601_FMT)
+        self.srcaddr = line[2]
+        self.srcaddr_raw = inet_aton(line[2])
+        self.dstaddr = line[3]
+        self.dstaddr_raw = inet_aton(line[3])
+        self.srcport = int(line[4])
+        self.dstport = int(line[5])
+        self.prot = line[6]  # Turn to integer?
+        self.dPkts = int(line[7]) + int(line[8])
+        self.dPkts = int(line[9]) + int(line[10])
+        self.tcp_flags = int(line[11])
