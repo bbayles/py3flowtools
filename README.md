@@ -10,6 +10,7 @@ with Python 2.7 as well.
 
 I test the most with NetFlow v5. If you have samples of other NetFlow logs that
 you can share, please send them to me.
+As of 2015-08-01 I've been using [nfdump](http://nfdump.sourceforge.net/) for NetFlow v9.
 
 
 ## Requirements
