@@ -8,6 +8,7 @@ import io
 import os
 import sys
 
+from .base_flow_wrapper import BaseFlowLog
 from .flow_line import NfdumpLine
 
 if sys.version_info.major < 3:
@@ -18,25 +19,30 @@ else:
 NFDUMP_ARGS = [
     'nfdump',
     '-r', None,
+    '-q',
     '-o', 'fmt:%ts,%te,%sa,%sp,%da,%dp,%pr,%ipkt,%opkt,%ibyt,%obyt,%flg',
 ]
 
 
-def FlowSet(file_path):
-    args = NFDUMP_ARGS[:]
-    args[2] = file_path
+class NfdumpLog(BaseFlowLog):
+    """
+    Uses nfdump to parse a NetFlow log.
+    """
+    def _reader(self):
+        args = NFDUMP_ARGS[:]
+        args[2] = self._file_path
 
-    with io.open(os.devnull, mode='wb') as DEVNULL:
-        popen_kwargs = {
-            'args': args, 'stdout': subprocess.PIPE, 'stderr': DEVNULL
-        }
-        with subprocess.Popen(**popen_kwargs) as proc:
-            iterator = iter(proc.stdout.readline, b'')
-            try:
-                next(iterator)
-            except StopIteration:
-                msg = 'Could not extract data from {}'.format(file_path)
-                raise IOError(msg)
-            for line in iterator:
-                parsed_line = NfdumpLine(line)
-                yield parsed_line
+        with io.open(os.devnull, mode='wb') as DEVNULL:
+            popen_kwargs = {
+                'args': args, 'stdout': subprocess.PIPE, 'stderr': DEVNULL
+            }
+            with subprocess.Popen(**popen_kwargs) as proc:
+                iterator = iter(proc.stdout.readline, b'')
+                try:
+                    next(iterator)
+                except StopIteration:
+                    msg = 'Could not extract data from {}'.format(file_path)
+                    raise IOError(msg)
+                for line in iterator:
+                    parsed_line = NfdumpLine(line)
+                    yield parsed_line

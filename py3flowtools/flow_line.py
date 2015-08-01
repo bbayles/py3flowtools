@@ -15,6 +15,13 @@ _1E6 = pow(10, 6)
 _1E9 = pow(10, 9)
 
 ISO8601_FMT = '%Y-%m-%d %H:%M:%S.%f'
+PROTOCOL_NUMBERS = {
+    'ICMP': 0x01,
+    'TCP': 0x06,
+    'UDP': 0x11,
+    'L2TP': 0x73,
+    'SCTP': 0x84,
+}
 
 
 def get_utc_time(unix_secs, unix_nsecs, sysuptime, x):
@@ -59,16 +66,18 @@ class FlowLine(object):
 class NfdumpLine(object):
     def __init__(self, line):
         # TODO 'fmt:%ts,%te,%sa,%sp,%da,%dp,%pr,%ipkt,%opkt,%ibyt,%obyt,%flg'
-        line = line.decode('ascii').split(',')
-        self.first = datetime.strptime(line[0], ISO8601_FMT)
-        self.last = datetime.strptime(line[0], ISO8601_FMT)
+        line = [x.strip() for x in line.decode('ascii').split(',')]
+        self.first = datetime.datetime.strptime(line[0], ISO8601_FMT)
+        self.last = datetime.datetime.strptime(line[1], ISO8601_FMT)
         self.srcaddr = line[2]
         self.srcaddr_raw = inet_aton(line[2])
-        self.dstaddr = line[3]
-        self.dstaddr_raw = inet_aton(line[3])
-        self.srcport = int(line[4])
+        self.dstaddr = line[4]
+        self.dstaddr_raw = inet_aton(line[4])
+        self.srcport = int(line[3])
         self.dstport = int(line[5])
-        self.prot = line[6]  # Turn to integer?
+        self.prot = PROTOCOL_NUMBERS.get(line[6], 0xFF)
         self.dPkts = int(line[7]) + int(line[8])
-        self.dPkts = int(line[9]) + int(line[10])
-        self.tcp_flags = int(line[11])
+        self.dOctets = int(line[9]) + int(line[10])
+
+        tcp_flags = ''.join('0' if b == '.' else '1' for b in line[11])
+        self.tcp_flags = int(tcp_flags, 2)
