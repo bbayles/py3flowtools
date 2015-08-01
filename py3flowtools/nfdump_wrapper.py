@@ -41,7 +41,9 @@ class NfdumpLog(BaseFlowLog):
                 try:
                     next(iterator)
                 except StopIteration:
-                    msg = 'Could not extract data from {}'.format(file_path)
+                    msg = 'Could not extract data from {}'.format(
+                        self._file_path
+                    )
                     raise IOError(msg)
                 for line in iterator:
                     parsed_line = NfdumpLine(line)

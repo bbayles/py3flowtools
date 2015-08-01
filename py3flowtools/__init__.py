@@ -4,26 +4,23 @@
 
 from .flowd_wrapper import FlowdLog
 from .flowtools_wrapper import FlowToolsLog
+from .nfdump_wrapper import NfdumpLog
 
-__all__ = ['NetFlowLog', 'FlowToolsLog', 'FlowdLog']
+__all__ = ['NetFlowLog', 'FlowToolsLog', 'FlowdLog', 'NfdumpLog']
 
 
 def NetFlowLog(file_path):
     """
-    Tries to parse the given file with flow-tools. If that fails, it tries to
-    use flowd.
+    Tries to parse the given file with each of the known formats.
     """
-    # Attempt to use flow-tools
-    try:
-        for flow in FlowToolsLog(file_path):
-            yield flow
-    except IOError:
-        pass
-    else:
-        return
-    # Attempt to use flowd
-    try:
-        for flow in FlowdLog(file_path):
-            yield flow
-    except IOError as err_msg:
-        raise IOError('Could not parse {}: {}'.format(file_path, err_msg))
+    for cls in (NfdumpLog, FlowToolsLog, FlowdLog):
+        try:
+            for flow in cls(file_path):
+                yield flow
+        except IOError:
+            pass
+        else:
+            return
+
+    # Nothing worked!
+    raise IOError('Could not parse {}'.format(file_path))

@@ -38,6 +38,12 @@ def get_utc_time(unix_secs, unix_nsecs, sysuptime, x):
 
 
 class FlowLine(object):
+    """
+    Converts a line of CSV data from flow-tools' flow-tools or
+    flowd's flowd-reader to a Python object whose fields match the flow-tools
+    FlowSet object.
+    """
+
     def __init__(self, line):
         line = line.decode('ascii').split(',')
 
@@ -64,8 +70,12 @@ class FlowLine(object):
 
 
 class NfdumpLine(object):
+    """
+    Converts a line of CSV data from nfdump's output to a Python object whose
+    fields match the flow-tools FlowSet object.
+    """
+
     def __init__(self, line):
-        # TODO 'fmt:%ts,%te,%sa,%sp,%da,%dp,%pr,%ipkt,%opkt,%ibyt,%obyt,%flg'
         line = [x.strip() for x in line.decode('ascii').split(',')]
         self.first = datetime.datetime.strptime(line[0], ISO8601_FMT)
         self.last = datetime.datetime.strptime(line[1], ISO8601_FMT)
